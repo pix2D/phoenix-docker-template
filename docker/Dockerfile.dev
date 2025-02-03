@@ -1,0 +1,16 @@
+FROM elixir:1.18.1-alpine
+
+# Install build dependencies
+RUN apk add --no-cache \
+    nodejs \
+    npm \
+    git \
+    build-base \
+    inotify-tools \
+    postgresql-client
+
+# Install hex and rebar
+RUN mix local.hex --force && \
+    mix local.rebar --force
+
+WORKDIR /app
